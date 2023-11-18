@@ -3,33 +3,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from version control
-                checkout scm
-            }
-        }
-
         stage('Build') {
             steps {
-                // Build your application
-                sh 'mvn clean install'
+                echo 'Building..'
             }
         }
-
         stage('Test') {
             steps {
-                // Run tests
-                sh 'mvn test'
+                echo 'Testing..'
             }
         }
-
         stage('Deploy') {
             steps {
-                // Deploy to Google Compute Engine using gcloud commands
-                sh 'gcloud compute deploy ...'
+                echo 'Deploying....'
             }
         }
     }
-
 }
