@@ -3,8 +3,7 @@ pipeline {
     agent any
 
     environment {
-        //GOOGLE_APPLICATION_CREDENTIALS = credentials('f6b5221b-7408-44a4-a3a1-88a06fd633f9')
-        PROJECT_ID = 'in-class-lab1-399521'
+        CLOUDSDK_CORE_PROJECT='in-class-lab1-399521'
         INSTANCE_NAME = 'Application'
         ZONE = 'us-central1-a'
     }
@@ -25,9 +24,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh'''
-                    gcloud version
-                '''
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]){
+                    sh'''
+                        // Use gcloud commands with the provided credentials
+                        gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                        gcloud compute zones list
+                    '''
+                }
             }
         }
         stage('Deploy') {
@@ -35,8 +38,7 @@ pipeline {
                 script {
 
                     echo 'Deploying..'
-                    // Use gcloud commands with the provided credentials
-                    //sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
+                    
                     
                     // Deploy the application to Google Compute Engine
                     //sh "gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/"
