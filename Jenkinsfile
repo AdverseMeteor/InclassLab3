@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        GCLOUD_CREDS = credentials('gcloud_creds')
+        GCLOUD_CREDS = credentials('gcloud-creds')
         CLOUDSDK_CORE_PROJECT='in-class-lab1-399521'
         INSTANCE_NAME = 'Application'
         ZONE = 'us-central1-a'
