@@ -24,9 +24,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]){
-                    sh'''
-                        // Use gcloud commands with the provided credentials
+                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]) {
+                    sh '''
                         gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
                         gcloud compute zones list
                     '''
