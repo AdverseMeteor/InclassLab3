@@ -5,7 +5,7 @@ pipeline {
     environment {
         GCLOUD_CREDS = credentials('gcloud-creds')
         CLOUDSDK_CORE_PROJECT='in-class-lab1-399521'
-        INSTANCE_NAME = 'instance-1'
+        INSTANCE_NAME = 'instance-2'
         ZONE = 'us-central1-a'
     }
 
@@ -32,8 +32,13 @@ pipeline {
             steps {
                 sh '''
                     gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
-                    gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/
-                    gcloud compute ssh --zone=${ZONE} ${INSTANCE_NAME} --command='sudo systemctl restart your-application'
+                    gcloud config set project ${CLOUDSDK_CORE_PROJECT}
+                    gcloud config set compute/zone ${ZONE}
+                    
+                    gcloud compute instances create ${INSTANCE_NAME} --image-family=debian-10 --image-project=debian-cloud --tags=http-server
+
+                    gcloud compute scp --recurse Hello.html ${INSTANCE_NAME}:/var/www/html/
+                    gcloud compute ssh ${INSTANCE_NAME} --command='sudo apt-get update && sudo apt-get install -y apache2 && sudo service apache2 start'
                 '''
             }
         }
