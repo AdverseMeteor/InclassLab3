@@ -3,6 +3,7 @@ pipeline {
     agent any
 
     environment {
+        GCLOUD_CREDS = credentials('gcloud_creds)
         CLOUDSDK_CORE_PROJECT='in-class-lab1-399521'
         INSTANCE_NAME = 'Application'
         ZONE = 'us-central1-a'
@@ -24,12 +25,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                withCredentials([file(credentialsId: 'gcloud-creds', variable: 'GCLOUD_CREDS')]) {
-                    sh '''
-                        gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
-                        gcloud compute zones list
-                    '''
-                }
+                sh '''
+                    gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                    gcloud compute zones list
+                '''
             }
         }
         stage('Deploy') {
