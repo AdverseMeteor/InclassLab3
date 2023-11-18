@@ -31,7 +31,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    
+
+                    echo 'Deploying..'
                     // Use gcloud commands with the provided credentials
                     //sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
                     
