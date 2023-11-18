@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('in-class-lab1-399521')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('6cd6dbf7-848f-437d-ad68-2baa3ea1d548')
     }
 
     stages {
