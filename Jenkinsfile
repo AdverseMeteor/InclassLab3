@@ -25,7 +25,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
+                sh'''
+                    gcloud version
+                '''
             }
         }
         stage('Deploy') {
