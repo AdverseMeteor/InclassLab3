@@ -11,14 +11,13 @@ pipeline {
 
     stages {
 
-        /*
+        
         stage('Checkout') {
             steps {
                 // Checkout source code from version control
                 checkout scm
             }
         }
-        */
         stage('Build') {
             steps {
                 echo 'Building..'
@@ -37,10 +36,9 @@ pipeline {
                     sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
                     
                     // Deploy the application to Google Compute Engine
-                    sh "gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/"
-                    sh "gcloud compute ssh --zone=${ZONE} ${INSTANCE_NAME} --command='sudo systemctl restart your-application'"
+                    //sh "gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/"
+                    //sh "gcloud compute ssh --zone=${ZONE} ${INSTANCE_NAME} --command='sudo systemctl restart your-application'"
                     
-                    sh "gcloud compute deploy ..."
                 }
             }
         }
