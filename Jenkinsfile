@@ -5,7 +5,7 @@ pipeline {
     environment {
         GCLOUD_CREDS = credentials('gcloud-creds')
         CLOUDSDK_CORE_PROJECT='in-class-lab1-399521'
-        INSTANCE_NAME = 'Application'
+        INSTANCE_NAME = 'instance-2'
         ZONE = 'us-central1-a'
     }
 
