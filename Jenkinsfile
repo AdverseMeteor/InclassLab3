@@ -39,7 +39,7 @@ pipeline {
 
                     
                     gcloud compute scp --recurse Hello.html ${INSTANCE_NAME}:~/
-                    gcloud compute ssh ${INSTANCE_NAME} --command='sudo apt-get update && sudo apt-get install -y nginx && sudo systemctl start nginx'
+                    gcloud compute ssh ${INSTANCE_NAME} --command='sudo apt-get update && sudo apt-get install -y nginx && sudo systemctl start nginx && sudo cp ~/Hello.html /var/www/html/index.html && sudo systemctl restart nginx'
                 '''
             }
         }
