@@ -33,7 +33,7 @@ pipeline {
                 script {
                     
                     // Use gcloud commands with the provided credentials
-                    sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
+                    //sh "gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}"
                     
                     // Deploy the application to Google Compute Engine
                     //sh "gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/"
