@@ -25,24 +25,16 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '''
-                    gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
-                    gcloud compute zones list
-                '''
+                echo 'Testing..'
             }
         }
         stage('Deploy') {
             steps {
-                script {
-
-                    echo 'Deploying..'
-                    
-                    
-                    // Deploy the application to Google Compute Engine
-                    //sh "gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/"
-                    //sh "gcloud compute ssh --zone=${ZONE} ${INSTANCE_NAME} --command='sudo systemctl restart your-application'"
-                    
-                }
+                sh '''
+                    gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"
+                    gcloud compute scp --zone=${ZONE} your-application.jar ${INSTANCE_NAME}:~/
+                    gcloud compute ssh --zone=${ZONE} ${INSTANCE_NAME} --command='sudo systemctl restart your-application'
+                '''
             }
         }
     }
