@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('6cd6dbf7-848f-437d-ad68-2baa3ea1d548')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('f6b5221b-7408-44a4-a3a1-88a06fd633f9')
         PROJECT_ID = 'in-class-lab1-399521'
         INSTANCE_NAME = 'Application'
         ZONE = 'us-central1-a'
