@@ -44,4 +44,13 @@ pipeline {
             }
         }
     }
+
+    post {
+        success {
+            sh "gcloud logging write jenkins-pipeline-status 'Pipeline succeeded' --project=${CLOUDSDK_CORE_PROJECT}"
+        }
+        failure {
+            sh "gcloud logging write jenkins-pipeline-status 'Pipeline failed' --project=${CLOUDSDK_CORE_PROJECT}"
+        }
+    }
 }
